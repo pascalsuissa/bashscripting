@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 echo ""
 echo "--------------------"
@@ -33,8 +33,8 @@ sleep 1s
 echo "--------------------"
 
 echo "cPanel Error Log Results:"
-grep1=grep $ip /usr/local/cpanel/logs/error_log
-if [ -z $grep1 ];
+grep1=$(grep $ip /usr/local/cpanel/logs/error_log)
+if [$grep1 -eq ""];
 then 
 	echo "No results found"
 fi
