@@ -1,101 +1,84 @@
 #! /bin/bash
 
+echo ""
+echo "--------------------"
+echo "--------------------"
 echo "Scan for an IP within system logs!"
-sleep 5s
+echo "--------------------"
+echo "--------------------"
+sleep 3s
+echo "Please provide required IP:"
 read ip
+echo "--------------------"
+echo "IP provided: $ip - Beginning Scan"
+echo "--------------------"
+sleep 3s
 
-sleep 2s
 echo "Apache Error Log Results:"
 grep $ip /usr/local/apache/logs/error_log
-sleep 2s
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 2s
 echo "ModSec Log Results:"
 grep $ip /usr/local/apache/logs/modsec_audit.log
-sleep 2s
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 2s
 echo "cPanel Access Log Results:"
 grep $ip /usr/local/cpanel/logs/access_log
-sleep 2s
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 2s
 echo "cPanel Error Log Results:"
-grep $ip /usr/local/cpanel/logs/error_log
-sleept 2s
+grep1=grep $ip /usr/local/cpanel/logs/error_log
+if [ -z $grep1 ];
+then 
+	echo "No results found"
+fi
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 2s
 echo "cPanel Stats Log Results:"
 grep $ip /usr/local/cpanel/logs/stats_log
-sleep 2s
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 2s
 echo "cPanel Check Service Log Results:"
 grep $ip /var/log/chkservd.log
-sleep 2s
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 2s
 echo "Exim Main Log Results:"
 grep $ip /var/log/exim_mainlog
-sleep 2s
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 5s
 echo "Exim Panic Log Results:"
 grep $ip /var/log/exim_paniclog
-sleep 5s
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 5s
 echo "Exim Reject Log Results:"
 grep $ip /var/log/exim_rejectlog
-sleep 5s
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 5s
 echo "lfd Log Results:"
 grep $ip /var/log/lfd.log
-sleep 5s
+sleep 1s
 
-echo ""
-echo ""
-echo ""
+echo "--------------------"
 
-sleep 5s
 echo "Thank you for using the IP search script!"
-sleep 5s
+sleep 3s
 
 exit
