@@ -47,7 +47,7 @@ sleep 1s
 echo "--------------------"
 echo "cPanel Access Log Results:"
 grep_cPanelAccess=$(grep -a $ip /usr/local/cpanel/logs/access_log)
-if [ -z "grep_cPanelAccess" ]
+if [ -z "$grep_cPanelAccess" ]
 then
 	echo "No Results Found"
 else
@@ -63,9 +63,9 @@ echo "--------------------"
 
 echo "cPanel Error Log Results:"
 grep_cPanelError=$(grep -a $ip /usr/local/cpanel/logs/error_log)
-if [ -z "$grep4" ];
+if [ -z "$grep_cPanelError" ];
 then 
-	echo "No results found"
+	echo "No Results Found"
 else
 	echo "Results Found"
 	echo "-------------"
@@ -167,6 +167,7 @@ sleep 1s
 
 echo "--------------------"
 echo "Thank you for using the IP search script!"
+echo "--------------------"
 sleep 3s
 
 exit
