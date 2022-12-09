@@ -1,23 +1,27 @@
 #!/bin/bash
 
 echo ""
-echo "--------------------"
-echo "--------------------"
+echo "-----------------------------------"
+echo "-----------------------------------"
 echo "Scan for an IP within system logs!"
-echo "--------------------"
-echo "--------------------"
-sleep 3s
+echo "-----------------------------------"
+echo "-----------------------------------"
+sleep 1s
 echo "Please provide required IP:"
 read ip
-echo "--------------------"
-echo "IP provided: $ip - Beginning Scan"
-echo "--------------------"
+echo "------------------------------"
+echo "IP provided: $ip - Scanning..."
+echo "------------------------------"
 sleep 3s
 
+echo "--------------------"
 echo "Apache Error Log Results:"
-grep $ip /usr/local/apache/logs/error_log
+grep1=$(grep ip /usr/local/apache/logs/error_log)
+if [$grep1 -eq ""]
+then
+	echo "No Results Found"
+fi
 sleep 1s
-
 echo "--------------------"
 
 echo "ModSec Log Results:"
@@ -33,8 +37,8 @@ sleep 1s
 echo "--------------------"
 
 echo "cPanel Error Log Results:"
-grep1=$(grep $ip /usr/local/cpanel/logs/error_log)
-if [$grep1 -eq ""];
+grep4=$(grep $ip /usr/local/cpanel/logs/error_log)
+if [$grep4 -eq ""];
 then 
 	echo "No results found"
 fi
