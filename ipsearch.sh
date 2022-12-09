@@ -16,10 +16,12 @@ sleep 3s
 
 echo "--------------------"
 echo "Apache Error Log Results:"
-grep1=$(grep ip /usr/local/apache/logs/error_log)
-if [$grep1 -eq ""]
+grep1=$(grep $ip /usr/local/apache/logs/error_log)
+if [ $grep1 -eq "" ]
 then
 	echo "No Results Found"
+else
+	echo "Results Found"
 fi
 sleep 1s
 echo "--------------------"
