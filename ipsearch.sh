@@ -1,46 +1,37 @@
 #!/bin/bash
 
-echo ""
-echo "-----------------------------------"
-echo "-----------------------------------"
+echo -e "-----------------------------------\n-----------------------------------"
 echo "Scan for an IP within system logs!"
-echo "-----------------------------------"
-echo "-----------------------------------"
+echo -e "-----------------------------------\n-----------------------------------"
 sleep 1s
 echo "Please provide required IP:"
 read ip
-echo "------------------------------"
-echo "IP provided: $ip - Scanning..."
-echo "------------------------------"
+echo -e "--------------------------------------\nIP provided: $ip - Scanning...\n--------------------------------------"
 sleep 3s
 
-echo "--------------------"
-echo "Apache Error Log Results:"
-grep_apache=$(grep -a $ip /usr/local/apache/logs/error_log)
-if [ -z "$grep_apache" ]
+echo -e "\n-------------------\nApache Error Log Results:\n-------------------"
+grep_apache=$( grep -a $ip /usr/local/apache/logs/error_log )
+if [ -z e"$grep_apache" ]
 then
-	echo "No Results Found"
+	echo -e "\nNo Results Found\n"
 else
-	echo "Results Found"
-	echo "-------------"
-	echo "-------------"
+	echo -e "\nResults Found\n-------------\n"
 	sleep 2s
 	echo $grep_apache
+	echo ""
 fi
 sleep 1s
 
-echo "--------------------"
-echo "ModSec Log Results:"
+echo -e "--------------------\nModSec Log Results:\n--------------------"
 grep_modsec=$(grep -a $ip /usr/local/apache/logs/modsec_audit.log)
 if [ -z "$grep_modsec" ]
 then
-	echo "No Results Found"
+	echo -e "\nNo Results Found\n"
 else
-	echo "Results Found"
-	echo "-------------"
-	echo ""
+	echo "Results Found\n-------------\n"
 	sleep 2s
 	echo $grep_modsec
+	echo ""
 fi
 sleep 1s
 
@@ -56,11 +47,11 @@ else
 	echo ""
 	sleep 2s
 	echo $grep_cPanelAccess
+	echo ""
 fi
 sleep 1s
 
 echo "--------------------"
-
 echo "cPanel Error Log Results:"
 grep_cPanelError=$(grep -a $ip /usr/local/cpanel/logs/error_log)
 if [ -z "$grep_cPanelError" ];
@@ -72,6 +63,7 @@ else
 	echo ""
 	sleep 2s
 	echo $grep_cPanelError
+	echo ""
 fi
 sleep 1s
 
@@ -87,6 +79,7 @@ else
 	echo ""
 	sleeps2
 	echo $grep_cPanelStats
+	echo ""
 fi
 sleep 1s
 
@@ -102,6 +95,7 @@ else
 	echo ""
 	sleep 2s
 	echo $grep_cPanelCheckService
+	echo ""
 fi
 sleep 1s
 
@@ -117,6 +111,7 @@ else
 	echo ""
 	sleep 2s
 	echo $grep_EximMainLog
+	echo ""
 fi
 sleep 1s
 
@@ -132,6 +127,7 @@ else
 	echo ""
 	sleep 2s
 	echo $grep_EximPanicLog
+	echo ""
 fi
 sleep 1s
 
@@ -147,6 +143,7 @@ else
 	echo ""
 	sleep 2s
 	echo $grep_EximReject
+	echo ""
 fi
 sleep 1s
 
@@ -162,6 +159,7 @@ else
 	echo ""
 	sleep 2s
 	echo $grep_lfd
+	echo ""
 fi
 sleep 1s
 
