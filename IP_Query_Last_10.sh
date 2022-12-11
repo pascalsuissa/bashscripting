@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#---------Comments----------
+#---------Start-Comments----------#
 
 #This script is intended to scan all logs offered by WHM's ConfigServer LFD page.
 
-#echo -e is inteded to allow \n and to provide the function to drop lines, add text, all in one echo.
+#echo -e is intended to allow \n and to provide the function to drop lines, add text, all in one echo.
 
 #If you are interested to evaluate whether a command resulted in no output, use [ -z "$variable" ], it is the same as 
 #using [ "$variable" -eq "" ].
@@ -15,7 +15,7 @@
 
 #Make sure to use spaces around your tests and within your variables, don't hug them too tight.
 
-#Script Start
+#---------End-Comments----------#
 
 echo -e "-----------------------------------\n-----------------------------------"
 echo "Scan for an IP within system logs!"
@@ -160,5 +160,3 @@ echo -e "------------------------------------------------------------------\nTha
 sleep 3s
 
 exit
-
-#Script End
