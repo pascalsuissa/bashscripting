@@ -1,5 +1,22 @@
 #!/bin/bash
 
+#---------Comments----------
+
+#This script is intended to scan all logs offered by WHM's ConfigServer LFD page.
+
+#echo -e is inteded to allow \n and to provide the function to drop lines, add text, all in one echo.
+
+#If you are interested to evaluate whether a command resulted in no output, use [ -z "$variable" ], it is the same as 
+#using [ "$variable" -eq "" ].
+
+#grep -a is intended to retrieve actual results and not "binary found" which ocaccionaly will come up.
+
+#tail -10 piped to the grep command is used to retrieve the last 10 hits of that file from our results.
+
+#Make sure to use spaces around your tests and within your variables, don't hug them too tight.
+
+#Script Start
+
 echo -e "-----------------------------------\n-----------------------------------"
 echo "Scan for an IP within system logs!"
 echo -e "-----------------------------------\n-----------------------------------"
@@ -143,3 +160,5 @@ echo -e "------------------------------------------------------------------\nTha
 sleep 3s
 
 exit
+
+#Script End
