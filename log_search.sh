@@ -15,6 +15,9 @@
 
 #Make sure to use spaces around your tests and within your variables, don't hug them too tight.
 
+# if [[ -f $0 ]] means if the script file exists and tests for it.
+#rm -- $0 will remove it.
+
 #---------End-Comments----------#
 
 echo -e "\n\n"
@@ -203,15 +206,5 @@ then
 	echo -e "\nScript file exists on system, removing.\n"
 	rm -- $0
 fi
-
-#echo -e "\nWould you like to remove the script? (y/n)"
-#read remove
-#if [ "$remove" == "y" ]
-#then
-#	echo "Removing File"
-#	rm log_search.sh
-#else
-#	echo -e "\nNo problems! Keeping file and exiting.\n"
-#fi
 
 exit
