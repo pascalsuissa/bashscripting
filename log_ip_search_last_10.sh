@@ -17,22 +17,27 @@
 
 #---------End-Comments----------#
 
-echo -e "-----------------------------------\n-----------------------------------"
-echo "Scan for an IP within system logs!"
-echo -e "-----------------------------------\n-----------------------------------"
+echo -e "\n\n"
+echo "██╗      ██████╗  ██████╗     ███████╗██╗██╗     ███████╗    ███████╗ ██████╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗ "
+echo "██║     ██╔═══██╗██╔════╝     ██╔════╝██║██║     ██╔════╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗"
+echo "██║     ██║   ██║██║  ███╗    █████╗  ██║██║     █████╗      ███████╗██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝"
+echo "██║     ██║   ██║██║   ██║    ██╔══╝  ██║██║     ██╔══╝      ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗"
+echo "███████╗╚██████╔╝╚██████╔╝    ██║     ██║███████╗███████╗    ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║"
+echo "╚══════╝ ╚═════╝  ╚═════╝     ╚═╝     ╚═╝╚══════╝╚══════╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝"
+echo -e "\n\n"
 sleep 1s
-echo "Please provide required IP:"
-read ip
-echo -e "--------------------------------------\nIP provided: $ip - Scanning...\n--------------------------------------"
-sleep 3s
+echo -e "------------------------------------------\nPlease provide required IP or Search Term:\n------------------------------------------\n"
+read input
+echo -e "\n--------------------------------------\nData Received: $input - Searching...\n--------------------------------------\n"
+sleep 2s
 
 
 #journalctl can be used to query the contents of the systemd(1)
 #journal as written by systemd-journald.service(8).
 #This also shows the dmesg messages [kernel messages].
 
-echo -e "\n-------------------\nJournalctl Log Results:\n-------------------"
-grep_journalctl=$( journalctl | grep $ip | tail -10 )
+echo -e "-------------------\nJournalctl Log Results:\n-------------------"
+grep_journalctl=$( journalctl | grep $input | tail -10 )
 if [ -z "$grep_journalctl" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -48,8 +53,8 @@ sleep 1s
 #Displays kernel messages from the kernel buffer during system boot.
 #The one above using journalctl covers this but this is here just in case.
 
-echo -e "\n-------------------\nDMESG\Kernel Buffer Log Results:\n-------------------"
-grep_dmesg=$( grep --color='always' -a $ip /var/log/dmesg | tail -10 )
+echo -e "-------------------\nDMESG\Kernel Buffer Log Results:\n-------------------"
+grep_dmesg=$( grep --color='always' -a $input /var/log/dmesg | tail -10 )
 if [ -z "$grep_dmesg" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -64,8 +69,8 @@ sleep 1s
 
 #Apache log file will include messages from the httpd daemon.
 
-echo -e "\n-------------------\nApache Error Log Results:\n-------------------"
-grep_apache=$( grep --color='always' -a $ip /usr/local/apache/logs/error_log | tail -10 )
+echo -e "-------------------\nApache Error Log Results:\n-------------------"
+grep_apache=$( grep --color='always' -a $input /usr/local/apache/logs/error_log | tail -10 )
 if [ -z "$grep_apache" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -78,7 +83,7 @@ fi
 sleep 1s
 
 echo -e "--------------------\nModSec Log Results:\n--------------------"
-grep_modsec=$( grep -a --color='always' $ip /usr/local/apache/logs/modsec_audit.log | tail -10 )
+grep_modsec=$( grep -a --color='always' $input /usr/local/apache/logs/modsec_audit.log | tail -10 )
 if [ -z "$grep_modsec" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -91,7 +96,7 @@ fi
 sleep 1s
 
 echo -e "--------------------\ncPanel Access Log Results:\n--------------------"
-grep_cPanelAccess=$( grep -a --color='always' $ip /usr/local/cpanel/logs/access_log | tail -10 )
+grep_cPanelAccess=$( grep -a --color='always' $input /usr/local/cpanel/logs/access_log | tail -10 )
 if [ -z "$grep_cPanelAccess" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -104,7 +109,7 @@ fi
 sleep 1s
 
 echo -e "--------------------\ncPanel Error Log Results:\n--------------------"
-grep_cPanelError=$( grep -a --color='always' $ip /usr/local/cpanel/logs/error_log | tail -10 )
+grep_cPanelError=$( grep -a --color='always' $input /usr/local/cpanel/logs/error_log | tail -10 )
 if [ -z "$grep_cPanelError" ];
 then 
 	echo -e "\n***No Results Found***\n"
@@ -117,7 +122,7 @@ fi
 sleep 1s
 
 echo -e "--------------------\ncPanel Stats Log Results:\n--------------------"
-grep_cPanelStats=$( grep -a --color='always' $ip /usr/local/cpanel/logs/stats_log | tail -10 )
+grep_cPanelStats=$( grep -a --color='always' $input /usr/local/cpanel/logs/stats_log | tail -10 )
 if [ -z "$grep_cPanelStats" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -130,7 +135,7 @@ fi
 sleep 1s
 
 echo -e "--------------------\ncPanel Check Service Log Results:\n--------------------"
-grep_cPanelCheckService=$( grep -a --color='always' $ip /var/log/chkservd.log | tail -10 )
+grep_cPanelCheckService=$( grep -a --color='always' $input /var/log/chkservd.log | tail -10 )
 if [ -z "$grep_cPanelCheckService" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -143,7 +148,7 @@ fi
 sleep 1s
 
 echo -e "--------------------\nExim Main Log Results:\n--------------------"
-grep_EximMainLog=$( grep -a --color='always' $ip /var/log/exim_mainlog | tail -10 )
+grep_EximMainLog=$( grep -a --color='always' $input /var/log/exim_mainlog | tail -10 )
 if [ -z "$grep_EximMainLog" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -156,7 +161,7 @@ fi
 sleep 1s
 
 echo -e "--------------------\nExim Panic Log Results:\n--------------------"
-grep_EximPanicLog=$( grep -a --color='always' $ip /var/log/exim_paniclog | tail -10 )
+grep_EximPanicLog=$( grep -a --color='always' $input /var/log/exim_paniclog | tail -10 )
 if [ -z "$grep_EximPanicLog" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -169,7 +174,7 @@ fi
 sleep 1s
 
 echo -e "--------------------\nExim Reject Log Results:\n--------------------"
-grep_EximReject=$( grep -a --color='always' $ip /var/log/exim_rejectlog | tail -10 )
+grep_EximReject=$( grep -a --color='always' $input /var/log/exim_rejectlog | tail -10 )
 if [ -z "$grep_EximReject" ]
 then
 	echo -e "\n***No Results Found***\n"
@@ -182,7 +187,7 @@ fi
 sleep 1s
 
 echo -e "-----------------\nlfd Log Results:\n-----------------"
-grep_lfd=$( grep -a --color='always' $ip /var/log/lfd.log | tail -10 )
+grep_lfd=$( grep -a --color='always' $input /var/log/lfd.log | tail -10 )
 if [ -z "$grep_lfd" ]
 then
 	echo -e "\n***No Results Found***\n"
