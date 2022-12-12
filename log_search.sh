@@ -198,5 +198,14 @@ sleep 1s
 echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
 sleep 3s
 
-rm -- "$0"
+echo -e "\nWould you like to remove the script? (y/n)"
+read remove
+if [ "$remove" == "y" ]
+then
+	echo "Removing File"
+	rm log_search.sh
+else
+	echo -e "\nNo problems! Keeping file and exiting.\n"
+fi
+
 exit
