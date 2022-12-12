@@ -49,7 +49,6 @@ else
 fi
 sleep 1s
 
-
 #Displays kernel messages from the kernel buffer during system boot.
 #The one above using journalctl covers this but this is here just in case.
 
@@ -65,9 +64,6 @@ else
 	echo ""
 fi
 sleep 1s
-
-
-#Apache log file will include messages from the httpd daemon.
 
 echo -e "-------------------\nApache Error Log Results:\n-------------------"
 grep_apache=$( grep --color='always' -a $input /usr/local/apache/logs/error_log | tail -10 )
@@ -199,7 +195,7 @@ else
 fi
 sleep 1s
 
-echo -e "------------------------------------------------------------------\nI Hope you found what you were looking for!\n------------------------------------------------------------------"
+echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
 sleep 3s
 
 exit
