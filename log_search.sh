@@ -2,7 +2,7 @@
 
 #---------Start-Comments----------#
 
-#This script is intended to scan all logs offered by WHM's ConfigServer LFD page.
+#This script is intended to scan log files offered by WHM's ConfigServer LFD page among other logs files within a Linux system.
 
 #echo -e is intended to allow \n and to provide the function to drop lines, add text, all in one echo.
 
@@ -198,4 +198,4 @@ sleep 1s
 echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
 sleep 3s
 
-exit
+rm -- "$0" exit
