@@ -198,14 +198,20 @@ sleep 1s
 echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
 sleep 3s
 
-echo -e "\nWould you like to remove the script? (y/n)"
-read remove
-if [ "$remove" == "y" ]
+if [[ -f $0 ]]
 then
-	echo "Removing File"
-	rm log_search.sh
-else
-	echo -e "\nNo problems! Keeping file and exiting.\n"
+	echo -e "\nScript file exists on system, removing.\n"
+	rm -- $0
 fi
+
+#echo -e "\nWould you like to remove the script? (y/n)"
+#read remove
+#if [ "$remove" == "y" ]
+#then
+#	echo "Removing File"
+#	rm log_search.sh
+#else
+#	echo -e "\nNo problems! Keeping file and exiting.\n"
+#fi
 
 exit
