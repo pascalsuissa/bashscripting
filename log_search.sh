@@ -198,4 +198,4 @@ sleep 1s
 echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
 sleep 3s
 
-exit
+rm -- "$0" exit
