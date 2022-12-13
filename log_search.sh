@@ -212,7 +212,7 @@ else
 fi
 sleep 1s
 
-echo -e "-----------------\nlfd Log Results:\n-----------------"
+echo -e "-----------------\nCSF/LFD Log Results:\n-----------------"
 grep_lfd=$( grep -a --color='always' $input /var/log/lfd.log | tail -10 )
 if [ -z "$grep_lfd" ]
 then
@@ -221,6 +221,55 @@ else
 	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_lfd
+	echo ""
+fi
+sleep 1s
+
+
+echo -e "-----------------\ncPHulk Brute Force Protection Log Results:\n-----------------"
+grep_cphulk=$( grep -a --color='always' $input /usr/local/cpanel/logs/cphulkd.log | tail -10 )
+if [ -z "$grep_cphulk" ]
+then
+	echo -e "\n***No Results Found Within cPHulk Log***\n"
+else
+	echo -e "\n***Results Found Within cPHulk Log***\n"
+	sleep 1s
+	echo $grep_cphulk
+	echo ""
+fi
+
+grep_cphulkerr=$( grep -a --color='always' $input /usr/local/cpanel/logs/cphulkd_errors.log | tail -10 )
+if [ -z "$grep_cphulkerr" ]
+then
+	echo -e "\n***No Results Found Within cPHulk Error Log***\n"
+else
+	echo -e "\n***Results Found Within cPHulk Error Log***\n"
+	sleep 1s
+	echo $grep_cphulkerr
+	echo ""
+fi
+sleep 1s
+
+echo -e "-----------------\nCSF Deny Log Results:\n-----------------"
+grep_csfdeny=$( grep -a --color='always' $input /etc/csf/csf.deny | tail -10 )
+if [ -z "$grep_csfdeny" ]
+then
+	echo -e "\n***No Results Found Within CSF Deny Log***\n"
+else
+	echo -e "\n***Results Found Within CSF Deny Log***\n"
+	sleep 1s
+	echo $grep_csfdeny
+	echo ""
+fi
+
+grep_csfallow=$( grep -a --color='always' $input /etc/csf/csf.allow | tail -10 )
+if [ -z "$grep_csfallow" ]
+then
+	echo -e "\n***No Results Found Within CSF Allow Log***\n"
+else
+	echo -e "\n***Results Found Within CSF Allow Log***\n"
+	sleep 1s
+	echo $grep_csfallow
 	echo ""
 fi
 sleep 1s
