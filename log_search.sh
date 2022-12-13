@@ -59,9 +59,9 @@ echo -e "-------------------\nDMESG\Kernel Buffer Log Results:\n----------------
 grep_dmesg=$( grep --color='always' -a $input /var/log/dmesg | tail -10 )
 if [ -z "$grep_dmesg" ]
 then
-	echo -e "***No Results Found***"
+	echo -e "***No Results Found***\n"
 else
-	echo -e "***Results Found***"
+	echo -e "***Results Found***\n"
 	sleep 1s
 	echo $grep_dmesg
 	echo ""
