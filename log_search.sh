@@ -203,7 +203,7 @@ sleep 3s
 
 if [[ -f $0 ]]
 then
-	echo -e "\nScript file exists on system, removing.\n"
+	echo -e "\nThe script file still exists on the system and will be removed in 3..2..1..\n"
 	rm -- $0
 fi
 
