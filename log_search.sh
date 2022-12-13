@@ -32,7 +32,7 @@ sleep 1s
 echo -e "------------------------------------------\nPlease provide required IP or Search Term:\n------------------------------------------\n"
 read input
 echo -e "\n--------------------------------------\nData Received: $input - Searching...\n--------------------------------------\n"
-sleep 2s
+sleep 1s
 
 
 #journalctl can be used to query the contents of the systemd(1)
@@ -46,7 +46,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_journalctl
 	echo ""
 fi
@@ -62,8 +62,34 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_dmesg
+	echo ""
+fi
+sleep 1s
+
+echo -e "-------------------\nUbuntu Servers syslog Results:\n-------------------"
+grep_syslog=$( grep --color='always' -a $input /var/log/syslog | tail -10 )
+if [ -z "$grep_syslog" ]
+then
+	echo -e "\n***No Results Found***\n"
+else
+	echo -e "\n***Results Found***\n"
+	sleep 1s
+	echo $grep_syslog
+	echo ""
+fi
+sleep 1s
+
+echo -e "-------------------\nRed Hat Based Servers System Messages Log Results:\n-------------------"
+grep_messages=$( grep --color='always' -a $input /var/log/messages | tail -10 )
+if [ -z "$grep_messages" ]
+then
+	echo -e "\n***No Results Found***\n"
+else
+	echo -e "\n***Results Found***\n"
+	sleep 1s
+	echo $grep_messages
 	echo ""
 fi
 sleep 1s
@@ -75,11 +101,12 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_apache
 	echo ""
 fi
 sleep 1s
+
 
 echo -e "--------------------\nModSec Log Results:\n--------------------"
 grep_modsec=$( grep -a --color='always' $input /usr/local/apache/logs/modsec_audit.log | tail -10 )
@@ -88,7 +115,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_modsec
 	echo ""
 fi
@@ -101,7 +128,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_cPanelAccess
 	echo ""
 fi
@@ -114,7 +141,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_cPanelError
 	echo ""
 fi
@@ -127,7 +154,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleeps2
+	sleep 1s
 	echo $grep_cPanelStats
 	echo ""
 fi
@@ -140,7 +167,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_cPanelCheckService
 	echo ""
 fi
@@ -153,7 +180,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_EximMainLog
 	echo ""
 fi
@@ -166,7 +193,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_EximPanicLog
 	echo ""
 fi
@@ -179,7 +206,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_EximReject
 	echo ""
 fi
@@ -192,7 +219,7 @@ then
 	echo -e "\n***No Results Found***\n"
 else
 	echo -e "\n***Results Found***\n"
-	sleep 2s
+	sleep 1s
 	echo $grep_lfd
 	echo ""
 fi
