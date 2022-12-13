@@ -250,7 +250,7 @@ else
 fi
 sleep 1s
 
-echo -e "-----------------\nCSF Deny Log Results:\n-----------------\n"
+echo -e "-----------------\nCSF Allow/Deny Log Results:\n-----------------\n"
 grep_csfdeny=$( grep -a --color='always' $input /etc/csf/csf.deny | tail -10 )
 if [ -z "$grep_csfdeny" ]
 then
