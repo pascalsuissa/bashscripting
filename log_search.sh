@@ -43,9 +43,9 @@ echo -e "-------------------\nJournalctl Log Results:\n-------------------\n"
 grep_journalctl=$( journalctl | grep $input | tail -10 )
 if [ -z "$grep_journalctl" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_journalctl
 	echo ""
@@ -59,9 +59,9 @@ echo -e "-------------------\nDMESG\Kernel Buffer Log Results:\n----------------
 grep_dmesg=$( grep --color='always' -a $input /var/log/dmesg | tail -10 )
 if [ -z "$grep_dmesg" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_dmesg
 	echo ""
@@ -72,9 +72,9 @@ echo -e "-------------------\nUbuntu Servers syslog Results:\n------------------
 grep_syslog=$( grep --color='always' -a $input /var/log/syslog | tail -10 )
 if [ -z "$grep_syslog" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_syslog
 	echo ""
@@ -85,9 +85,9 @@ echo -e "-------------------\nRed Hat Based Servers System Messages Log Results:
 grep_messages=$( grep --color='always' -a $input /var/log/messages | tail -10 )
 if [ -z "$grep_messages" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_messages
 	echo ""
@@ -98,9 +98,9 @@ echo -e "-------------------\nApache Error Log Results:\n-------------------\n"
 grep_apache=$( grep --color='always' -a $input /usr/local/apache/logs/error_log | tail -10 )
 if [ -z "$grep_apache" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_apache
 	echo ""
@@ -112,9 +112,9 @@ echo -e "--------------------\nModSec Log Results:\n--------------------\n"
 grep_modsec=$( grep -a --color='always' $input /usr/local/apache/logs/modsec_audit.log | tail -10 )
 if [ -z "$grep_modsec" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_modsec
 	echo ""
@@ -125,9 +125,9 @@ echo -e "--------------------\ncPanel Access Log Results:\n--------------------\
 grep_cPanelAccess=$( grep -a --color='always' $input /usr/local/cpanel/logs/access_log | tail -10 )
 if [ -z "$grep_cPanelAccess" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_cPanelAccess
 	echo ""
@@ -138,9 +138,9 @@ echo -e "--------------------\ncPanel Error Log Results:\n--------------------\n
 grep_cPanelError=$( grep -a --color='always' $input /usr/local/cpanel/logs/error_log | tail -10 )
 if [ -z "$grep_cPanelError" ];
 then 
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_cPanelError
 	echo ""
@@ -151,9 +151,9 @@ echo -e "--------------------\ncPanel Stats Log Results:\n--------------------\n
 grep_cPanelStats=$( grep -a --color='always' $input /usr/local/cpanel/logs/stats_log | tail -10 )
 if [ -z "$grep_cPanelStats" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_cPanelStats
 	echo ""
@@ -164,9 +164,9 @@ echo -e "--------------------\ncPanel Check Service Log Results:\n--------------
 grep_cPanelCheckService=$( grep -a --color='always' $input /var/log/chkservd.log | tail -10 )
 if [ -z "$grep_cPanelCheckService" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_cPanelCheckService
 	echo ""
@@ -177,9 +177,9 @@ echo -e "--------------------\nExim Main Log Results:\n--------------------\n"
 grep_EximMainLog=$( grep -a --color='always' $input /var/log/exim_mainlog | tail -10 )
 if [ -z "$grep_EximMainLog" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_EximMainLog
 	echo ""
@@ -190,9 +190,9 @@ echo -e "--------------------\nExim Panic Log Results:\n--------------------\n"
 grep_EximPanicLog=$( grep -a --color='always' $input /var/log/exim_paniclog | tail -10 )
 if [ -z "$grep_EximPanicLog" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_EximPanicLog
 	echo ""
@@ -203,9 +203,9 @@ echo -e "--------------------\nExim Reject Log Results:\n--------------------\n"
 grep_EximReject=$( grep -a --color='always' $input /var/log/exim_rejectlog | tail -10 )
 if [ -z "$grep_EximReject" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_EximReject
 	echo ""
@@ -216,9 +216,9 @@ echo -e "-----------------\nCSF/LFD Log Results:\n-----------------\n"
 grep_lfd=$( grep -a --color='always' $input /var/log/lfd.log | tail -10 )
 if [ -z "$grep_lfd" ]
 then
-	echo -e "***No Results Found***\n"
+	echo -e "\n***No Results Found***\n"
 else
-	echo -e "***Results Found***\n"
+	echo -e "\n***Results Found***\n"
 	sleep 1s
 	echo $grep_lfd
 	echo ""
@@ -230,9 +230,9 @@ echo -e "-----------------\ncPHulk Brute Force Protection Log Results:\n--------
 grep_cphulk=$( grep -a --color='always' $input /usr/local/cpanel/logs/cphulkd.log | tail -10 )
 if [ -z "$grep_cphulk" ]
 then
-	echo -e "***No Results Found Within cPHulk Log***\n"
+	echo -e "\n***No Results Found Within cPHulk Log***\n"
 else
-	echo -e "***Results Found Within cPHulk Log***\n"
+	echo -e "\n***Results Found Within cPHulk Log***\n"
 	sleep 1s
 	echo $grep_cphulk
 	echo ""
@@ -241,9 +241,9 @@ fi
 grep_cphulkerr=$( grep -a --color='always' $input /usr/local/cpanel/logs/cphulkd_errors.log | tail -10 )
 if [ -z "$grep_cphulkerr" ]
 then
-	echo -e "***No Results Found Within cPHulk Error Log***\n"
+	echo -e "\n***No Results Found Within cPHulk Error Log***\n"
 else
-	echo -e "***Results Found Within cPHulk Error Log***\n"
+	echo -e "\n***Results Found Within cPHulk Error Log***\n"
 	sleep 1s
 	echo $grep_cphulkerr
 	echo ""
@@ -254,9 +254,9 @@ echo -e "-----------------\nCSF Allow/Deny Log Results:\n-----------------\n"
 grep_csfdeny=$( grep -a --color='always' $input /etc/csf/csf.deny | tail -10 )
 if [ -z "$grep_csfdeny" ]
 then
-	echo -e "***No Results Found Within CSF Deny Log***\n"
+	echo -e "\n***No Results Found Within CSF Deny Log***\n"
 else
-	echo -e "***Results Found Within CSF Deny Log***\n"
+	echo -e "\n***Results Found Within CSF Deny Log***\n"
 	sleep 1s
 	echo $grep_csfdeny
 	echo ""
@@ -265,9 +265,9 @@ fi
 grep_csfallow=$( grep -a --color='always' $input /etc/csf/csf.allow | tail -10 )
 if [ -z "$grep_csfallow" ]
 then
-	echo -e "***No Results Found Within CSF Allow Log***\n"
+	echo -e "\n***No Results Found Within CSF Allow Log***\n"
 else
-	echo -e "***Results Found Within CSF Allow Log***\n"
+	echo -e "\n***Results Found Within CSF Allow Log***\n"
 	sleep 1s
 	echo $grep_csfallow
 	echo ""
