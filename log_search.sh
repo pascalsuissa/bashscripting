@@ -39,7 +39,7 @@ sleep 1s
 #journal as written by systemd-journald.service(8).
 #This also shows the dmesg messages [kernel messages].
 
-echo -e "-------------------\nJournalctl Log Results:\n-------------------"
+echo -e "-------------------\nJournalctl Log Results:\n-------------------\n"
 grep_journalctl=$( journalctl | grep $input | tail -10 )
 if [ -z "$grep_journalctl" ]
 then
@@ -55,7 +55,7 @@ sleep 1s
 #Displays kernel messages from the kernel buffer during system boot.
 #The one above using journalctl covers this but this is here just in case.
 
-echo -e "-------------------\nDMESG\Kernel Buffer Log Results:\n-------------------"
+echo -e "-------------------\nDMESG\Kernel Buffer Log Results:\n-------------------\n"
 grep_dmesg=$( grep --color='always' -a $input /var/log/dmesg | tail -10 )
 if [ -z "$grep_dmesg" ]
 then
@@ -68,7 +68,7 @@ else
 fi
 sleep 1s
 
-echo -e "-------------------\nUbuntu Servers syslog Results:\n-------------------"
+echo -e "-------------------\nUbuntu Servers syslog Results:\n-------------------\n"
 grep_syslog=$( grep --color='always' -a $input /var/log/syslog | tail -10 )
 if [ -z "$grep_syslog" ]
 then
@@ -81,7 +81,7 @@ else
 fi
 sleep 1s
 
-echo -e "-------------------\nRed Hat Based Servers System Messages Log Results:\n-------------------"
+echo -e "-------------------\nRed Hat Based Servers System Messages Log Results:\n-------------------\n"
 grep_messages=$( grep --color='always' -a $input /var/log/messages | tail -10 )
 if [ -z "$grep_messages" ]
 then
@@ -94,7 +94,7 @@ else
 fi
 sleep 1s
 
-echo -e "-------------------\nApache Error Log Results:\n-------------------"
+echo -e "-------------------\nApache Error Log Results:\n-------------------\n"
 grep_apache=$( grep --color='always' -a $input /usr/local/apache/logs/error_log | tail -10 )
 if [ -z "$grep_apache" ]
 then
@@ -108,7 +108,7 @@ fi
 sleep 1s
 
 
-echo -e "--------------------\nModSec Log Results:\n--------------------"
+echo -e "--------------------\nModSec Log Results:\n--------------------\n"
 grep_modsec=$( grep -a --color='always' $input /usr/local/apache/logs/modsec_audit.log | tail -10 )
 if [ -z "$grep_modsec" ]
 then
@@ -121,7 +121,7 @@ else
 fi
 sleep 1s
 
-echo -e "--------------------\ncPanel Access Log Results:\n--------------------"
+echo -e "--------------------\ncPanel Access Log Results:\n--------------------\n"
 grep_cPanelAccess=$( grep -a --color='always' $input /usr/local/cpanel/logs/access_log | tail -10 )
 if [ -z "$grep_cPanelAccess" ]
 then
@@ -134,7 +134,7 @@ else
 fi
 sleep 1s
 
-echo -e "--------------------\ncPanel Error Log Results:\n--------------------"
+echo -e "--------------------\ncPanel Error Log Results:\n--------------------\n"
 grep_cPanelError=$( grep -a --color='always' $input /usr/local/cpanel/logs/error_log | tail -10 )
 if [ -z "$grep_cPanelError" ];
 then 
@@ -147,7 +147,7 @@ else
 fi
 sleep 1s
 
-echo -e "--------------------\ncPanel Stats Log Results:\n--------------------"
+echo -e "--------------------\ncPanel Stats Log Results:\n--------------------\n"
 grep_cPanelStats=$( grep -a --color='always' $input /usr/local/cpanel/logs/stats_log | tail -10 )
 if [ -z "$grep_cPanelStats" ]
 then
@@ -160,7 +160,7 @@ else
 fi
 sleep 1s
 
-echo -e "--------------------\ncPanel Check Service Log Results:\n--------------------"
+echo -e "--------------------\ncPanel Check Service Log Results:\n--------------------\n"
 grep_cPanelCheckService=$( grep -a --color='always' $input /var/log/chkservd.log | tail -10 )
 if [ -z "$grep_cPanelCheckService" ]
 then
@@ -173,7 +173,7 @@ else
 fi
 sleep 1s
 
-echo -e "--------------------\nExim Main Log Results:\n--------------------"
+echo -e "--------------------\nExim Main Log Results:\n--------------------\n"
 grep_EximMainLog=$( grep -a --color='always' $input /var/log/exim_mainlog | tail -10 )
 if [ -z "$grep_EximMainLog" ]
 then
@@ -186,7 +186,7 @@ else
 fi
 sleep 1s
 
-echo -e "--------------------\nExim Panic Log Results:\n--------------------"
+echo -e "--------------------\nExim Panic Log Results:\n--------------------\n"
 grep_EximPanicLog=$( grep -a --color='always' $input /var/log/exim_paniclog | tail -10 )
 if [ -z "$grep_EximPanicLog" ]
 then
@@ -199,7 +199,7 @@ else
 fi
 sleep 1s
 
-echo -e "--------------------\nExim Reject Log Results:\n--------------------"
+echo -e "--------------------\nExim Reject Log Results:\n--------------------\n"
 grep_EximReject=$( grep -a --color='always' $input /var/log/exim_rejectlog | tail -10 )
 if [ -z "$grep_EximReject" ]
 then
@@ -212,7 +212,7 @@ else
 fi
 sleep 1s
 
-echo -e "-----------------\nCSF/LFD Log Results:\n-----------------"
+echo -e "-----------------\nCSF/LFD Log Results:\n-----------------\n"
 grep_lfd=$( grep -a --color='always' $input /var/log/lfd.log | tail -10 )
 if [ -z "$grep_lfd" ]
 then
@@ -226,7 +226,7 @@ fi
 sleep 1s
 
 
-echo -e "-----------------\ncPHulk Brute Force Protection Log Results:\n-----------------"
+echo -e "-----------------\ncPHulk Brute Force Protection Log Results:\n-----------------\n"
 grep_cphulk=$( grep -a --color='always' $input /usr/local/cpanel/logs/cphulkd.log | tail -10 )
 if [ -z "$grep_cphulk" ]
 then
@@ -250,7 +250,7 @@ else
 fi
 sleep 1s
 
-echo -e "-----------------\nCSF Deny Log Results:\n-----------------"
+echo -e "-----------------\nCSF Deny Log Results:\n-----------------\n"
 grep_csfdeny=$( grep -a --color='always' $input /etc/csf/csf.deny | tail -10 )
 if [ -z "$grep_csfdeny" ]
 then
