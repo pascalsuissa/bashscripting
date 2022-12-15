@@ -20,11 +20,6 @@
 
 #------------End Comments------------
 
-#Color Variables
-NC="\033[0m"
-G="\033[0;32m"
-R="\033[1;31m"
-
 echo -e "\n\n"
 echo "████████╗██╗  ██╗███████╗    ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ █████╗ ████████╗███████╗";
 echo "╚══██╔══╝██║  ██║██╔════╝    ██║   ██║██║  ╚══██╔══╝██║████╗ ████║██╔══██╗╚══██╔══╝██╔════╝";
@@ -45,6 +40,11 @@ echo -e "------------------------------------------\nPlease provide required IP 
 read input
 echo -e "\n--------------------------------------\nData Received: $input - Searching...\n--------------------------------------\n"
 sleep 1s
+
+#Color Variables
+NC="\033[0m"
+G="\033[0;32m"
+R="\033[1;31m"
 
 #journalctl can be used to query the contents of the systemd(1)
 #journal as written by systemd-journald.service(8).
