@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#---------Start-Comments----------#
+#------------Start Comments------------
 
-#This script is intended to scan log files offered by WHM's ConfigServer LFD page among other logs files within a Linux system.
+#The script will scan system logs and various service logs.
 
 #echo -e is intended to allow \n and to provide the function to drop lines, add text, all in one echo.
 
@@ -18,15 +18,27 @@
 # if [[ -f $0 ]] means if the script file exists and tests for it.
 #rm -- $0 will remove it.
 
-#---------End-Comments----------#
+#------------End Comments------------
+
+#Color Variables
+NC="\033[0m"
+G="\033[0;32m"
+R="\033[1;31m"
 
 echo -e "\n\n"
-echo "██╗      ██████╗  ██████╗     ███████╗██╗██╗     ███████╗    ███████╗ ██████╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗ "
-echo "██║     ██╔═══██╗██╔════╝     ██╔════╝██║██║     ██╔════╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗"
-echo "██║     ██║   ██║██║  ███╗    █████╗  ██║██║     █████╗      ███████╗██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝"
-echo "██║     ██║   ██║██║   ██║    ██╔══╝  ██║██║     ██╔══╝      ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗"
-echo "███████╗╚██████╔╝╚██████╔╝    ██║     ██║███████╗███████╗    ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║"
-echo "╚══════╝ ╚═════╝  ╚═════╝     ╚═╝     ╚═╝╚══════╝╚══════╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝"
+echo "████████╗██╗  ██╗███████╗    ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ █████╗ ████████╗███████╗";
+echo "╚══██╔══╝██║  ██║██╔════╝    ██║   ██║██║  ╚══██╔══╝██║████╗ ████║██╔══██╗╚══██╔══╝██╔════╝";
+echo "   ██║   ███████║█████╗      ██║   ██║██║     ██║   ██║██╔████╔██║███████║   ██║   █████╗  ";
+echo "   ██║   ██╔══██║██╔══╝      ██║   ██║██║     ██║   ██║██║╚██╔╝██║██╔══██║   ██║   ██╔══╝  ";
+echo "   ██║   ██║  ██║███████╗    ╚██████╔╝███████╗██║   ██║██║ ╚═╝ ██║██║  ██║   ██║   ███████╗";
+echo "   ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝";
+echo "                                                                                           ";
+echo "██╗      ██████╗  ██████╗     ███████╗ ██████╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗  ";
+echo "██║     ██╔═══██╗██╔════╝     ██╔════╝██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗ ";
+echo "██║     ██║   ██║██║  ███╗    ███████╗██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝ ";
+echo "██║     ██║   ██║██║   ██║    ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗ ";
+echo "███████╗╚██████╔╝╚██████╔╝    ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║ ";
+echo "╚══════╝ ╚═════╝  ╚═════╝     ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ";
 echo -e "\n\n"
 sleep 1s
 echo -e "------------------------------------------\nPlease provide required IP or Search Term:\n------------------------------------------\n"
@@ -42,9 +54,9 @@ echo -e "-------------------\nJournalctl Log Results:\n-------------------"
 GREP_JOURNALCTL=$( journalctl | grep $input | tail -10 )
 if [ -z "$GREP_JOURNALCTL" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_JOURNALCTL
 	echo ""
@@ -58,9 +70,9 @@ echo -e "-------------------\nDMESG\Kernel Buffer Log Results:\n----------------
 GREP_DMESG=$( grep --color='always' -a $input /var/log/dmesg | tail -10 )
 if [ -z "$GREP_DMESG" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_DMESG
 	echo ""
@@ -71,9 +83,9 @@ echo -e "-------------------\nUbuntu Servers syslog Results:\n------------------
 GREP_SYSLOG=$( grep --color='always' -a $input /var/log/syslog | tail -10 )
 if [ -z "$GREP_SYSLOG" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_SYSLOG
 	echo ""
@@ -84,9 +96,9 @@ echo -e "-------------------\nRed Hat Based Servers System Messages Log Results:
 GREP_MESSAGES=$( grep --color='always' -a $input /var/log/messages | tail -10 )
 if [ -z "$GREP_MESSAGES" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_MESSAGES
 	echo ""
@@ -97,9 +109,9 @@ echo -e "-------------------\nApache Error Log Results:\n-------------------"
 GREP_APACHE=$( grep --color='always' -a $input /usr/local/apache/logs/error_log | tail -10 )
 if [ -z "$GREP_APACHE" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_APACHE
 	echo ""
@@ -110,9 +122,9 @@ echo -e "--------------------\nModSec Log Results:\n--------------------"
 GREP_MODSEC=$( grep -a --color='always' $input /usr/local/apache/logs/modsec_audit.log | tail -10 )
 if [ -z "$GREP_MODSEC" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_MODSEC
 	echo ""
@@ -123,9 +135,9 @@ echo -e "--------------------\ncPanel Access Log Results:\n--------------------"
 GREP_CPANELACCESS=$( grep -a --color='always' $input /usr/local/cpanel/logs/access_log | tail -10 )
 if [ -z "$GREP_CPANELACCESS" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_CPANELACCESS
 	echo ""
@@ -136,9 +148,9 @@ echo -e "--------------------\ncPanel Error Log Results:\n--------------------"
 GREP_CPANELERROR=$( grep -a --color='always' $input /usr/local/cpanel/logs/error_log | tail -10 )
 if [ -z "$GREP_CPANELERROR" ];
 then 
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_CPANELERROR
 	echo ""
@@ -149,9 +161,9 @@ echo -e "--------------------\ncPanel Stats Log Results:\n--------------------"
 GREP_CPANELSTATS=$( grep -a --color='always' $input /usr/local/cpanel/logs/stats_log | tail -10 )
 if [ -z "$GREP_CPANELSTATS" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_CPANELSTATS
 	echo ""
@@ -162,9 +174,9 @@ echo -e "--------------------\ncPanel Check Service Log Results:\n--------------
 GREP_CPANELCHECKSERVICE=$( grep -a --color='always' $input /var/log/chkservd.log | tail -10 )
 if [ -z "$GREP_CPANELCHECKSERVICE" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_CPANELCHECKSERVICE
 	echo ""
@@ -175,9 +187,9 @@ echo -e "--------------------\nExim Main Log Results:\n--------------------"
 GREP_EXIMMAINLOG=$( grep -a --color='always' $input /var/log/exim_mainlog | tail -10 )
 if [ -z "$GREP_EXIMMAINLOG" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_EXIMMAINLOG
 	echo ""
@@ -188,9 +200,9 @@ echo -e "--------------------\nExim Panic Log Results:\n--------------------"
 GREP_EXIMPANICLOG=$( grep -a --color='always' $input /var/log/exim_paniclog | tail -10 )
 if [ -z "$GREP_EXIMPANICLOG" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_EXIMPANICLOG
 	echo ""
@@ -201,9 +213,9 @@ echo -e "--------------------\nExim Reject Log Results:\n--------------------\n"
 GREP_EXIMREJECT=$( grep -a --color='always' $input /var/log/exim_rejectlog | tail -10 )
 if [ -z "$GREP_EXIMREJECT" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_EXIMREJECT
 	echo ""
@@ -214,9 +226,9 @@ echo -e "-----------------\nCSF/LFD Log Results:\n-----------------"
 GREP_LFD=$( grep -a --color='always' $input /var/log/lfd.log | tail -10 )
 if [ -z "$GREP_LFD" ]
 then
-	echo -e "\n***No Results Found***\n"
+	echo -e "\n${G}***No Results Found***${NC}\n"
 else
-	echo -e "\n***Results Found***\n"
+	echo -e "\n${R}***Results Found***${NC}\n"
 	sleep 1s
 	echo $GREP_LFD
 	echo ""
