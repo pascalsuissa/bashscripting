@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #------------Start Comments------------
-
 #The script will scan system logs and various service logs.
 
 #echo -e is intended to allow \n and to provide the function to drop lines, add text, all in one echo.
@@ -17,7 +16,6 @@
 
 # if [[ -f $0 ]] means if the script file exists and tests for it.
 #rm -- $0 will remove it.
-
 #------------End Comments------------
 
 echo -e "\n\n"
