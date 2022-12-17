@@ -44,9 +44,9 @@ G="\033[0;32m"
 R="\033[1;31m"
 
 #Variables
-GREP=(grep --color='always' -a)
-JOURNALCTL=$( journalctl | grep "$input" | tail -10 )
-DMESG=$( "$GREP" "$input" /var/log/dmesg 2> /dev/null | tail -10 )
+GREP=( grep --color -a )
+JOURNALCTL=$( journalctl | "${GREP[@]}" "$input" | tail -10 )
+DMESG=$( "${GREP[@]}" "$input" /var/log/dmesg 2> /dev/null | tail -10 )
 UBUSYSLOG=$( "$GREP" "$input" /var/log/syslog 2> /dev/null | tail -10 )
 REDHATMESSAGES=$( "$GREP" "$input" /var/log/messages 2> /dev/null | tail -10 )
 APACHE=$( "$GREP" "$input" /usr/local/apache/logs/error_log 2> /dev/null | tail -10 )
@@ -114,60 +114,61 @@ fi
 
 #cPanel Stats Log
 if [[ -n "$CPANELSTATS" ]]; then
-        echo -e "--------------------\n${R}cPanel Stats Log Results:${NC}${R}\n--------------------"
+        echo -e "--------------------\n${R}cPanel Stats Log Results:${NC}\n--------------------"
 	echo -e "${CPANELSTATS}\n"
 fi
 
 #cPanel Check Service Log
-if [[ -n /var/log/chkservd.log ]]; then
+if [[ -n "$CPANELCHECKSERVICE" ]]; then
 	echo -e "--------------------\n${R}cPanel Check Service Log Results:${NC}\n--------------------"
-	echo -e "${CPANELCHECKSERVICE\n"
+	echo -e "${CPANELCHECKSERVICE}\n"
 fi
 
 #Exim Main Log
-if [[ -n /var/log/exim_mainlog ]]; then
+if [[ -n "$EXIMMAINLOG" ]]; then
         echo -e "--------------------\n${R}Exim Main Log Results:${NC}\n--------------------"
 	echo -e "${EXIMMAINLOG}\n"
 fi
 
 #Exim Panic Log
-if [[ -n /var/log/exim_paniclog ]]; then
+if [[ -n "$EXIMPANICLOG" ]]; then
         echo -e "--------------------\n${R}Exim Panic Log Results:${NC}\n--------------------"
 	echo -e "${EXIMPANICLOG}\n"
 fi
 
 #Exim Reject Log
-if [[ -n /var/log/exim_rejectlog ]]; then
+if [[ -n "$EXIMPANICLOG" ]]; then
         echo -e "--------------------\n${R}Exim Reject Log Results:${NC}\n--------------------"
 	echo -e "${EXIMREJECT}\n"
 fi
 
 #LFD Log
-if [[ -n /var/log/lfd.log ]]; then
+if [[ -n "$LFD" ]]; then
 	echo -e "-----------------\n${R}CSF/LFD Log Results:${NC}\n-----------------"
 	echo -e "${LFD}\n"
 fi
 
-#CSF Deny log
-if [[ -n /etc/csf/csf.deny ]]; then
-	echo -e "-----------------\n${R}CSF Deny Log Results:${NC}\n-----------------"
-	echo -e "${CSFDENY}\n"
-fi
 
 #CSF Allow Log
-if [[ -n /etc/csf/csf.allow ]]; then
+if [[ -n "$CSFALLOW" ]]; then
 	echo -e "-----------------\n${R}CSF Allow Log Results:${NC}\n-----------------"
 	echo -e "${CSFALLOW}\n"
 fi
 
+#CSF Deny log
+if [[ -n "$CSFDENY" ]]; then
+	echo -e "-----------------\n${R}CSF Deny Log Results:${NC}\n-----------------"
+	echo -e "${CSFDENY}\n"
+fi
+
 #cPHulk Log
-if [[ -n /usr/local/cpanel/logs/cphulkd.log ]]; then
+if [[ -n "$CPHULK" ]]; then
 	echo -e "-----------------\n${R}cPHulk Brute Force Protection Log Results:${NC}\n-----------------"
 	echo -e "${CPHULK}\n"
 fi
 
 #cPHulk Error Log
-if [[ -n /usr/local/cpanel/logs/cphulkd_errors.log ]]; then
+if [[ -n "$CPHULKERR" ]]; then
 	echo -e "-----------------\n${R}cPHulk Brute Force Protection Error Log Results:${NC}\n-----------------"
 	echo -e "${CPHULKERR}\n"
 fi
@@ -175,8 +176,7 @@ fi
 echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
 sleep 3s
 
-#if [[ -f "$0" ]]
-#then
+#if [[ -f "$0" ]]; then
 #	rm -- "$0"
 #fi
 
