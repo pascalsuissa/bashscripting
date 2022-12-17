@@ -84,183 +84,92 @@ fi
 
 #Red Hat Based System Messages
 if [[ -n "$REDHATMESSAGES" ]]; then
-        echo -e "-------------------\nRed Hat Based Servers System Messages Log Results:\n-------------------"
+        echo -e "-------------------\n${R}Red Hat Based Servers System Messages Log Results:${NC}\n-------------------"
 	echo -e "${MESSAGES}\n"
 fi
 
 #Apache Logs
 if [[ -n "$APACHE" ]]; then
-        echo -e "-------------------\nApache Error Log Results:\n-------------------"
+        echo -e "-------------------\n${R}Apache Error Log Results:${NC}\n-------------------"
 	echo -e "${APACHE}\n"
 fi
 
 #ModSec Log
 if [[ -n "$MODSEC" ]]; then
-        echo -e "--------------------\nModSec Log Results:\n--------------------"
+        echo -e "--------------------\n${R}ModSec Log Results:${NC}\n--------------------"
 	echo -e "${MODSEC}\n"
 fi
 
 #cPanel Access Log
 if [[ -n "$CPANELACCESSLOG" ]]; then
-        echo -e "--------------------\ncPanel Access Log Results:\n--------------------"
+        echo -e "--------------------\n${R}cPanel Access Log Results:${NC}\n--------------------"
 	echo -e "${CPANELACCESS}\n"
 fi
 
 #cPanel Error Log
 if [[ -n "$CPANELERROR" ]]; then
-	echo -e "--------------------\ncPanel Error Log Results:\n--------------------"
+	echo -e "--------------------\n${R}cPanel Error Log Results:${NC}\n--------------------"
 	echo -e "${CPANELERROR}\n"
 fi
 
 #cPanel Stats Log
 if [[ -n "$CPANELSTATS" ]]; then
-        echo -e "--------------------\ncPanel Stats Log Results:\n--------------------"
-echo -e "\nLog Available - Scanning"
-else
-    	echo -e "\nLog Not Available"
+        echo -e "--------------------\n${R}cPanel Stats Log Results:${NC}${R}\n--------------------"
+	echo -e "${CPANELSTATS}\n"
 fi
 
-if [[ -z "$CPANELSTATS" ]]; then
-	echo -e "\n***No Results Found***\n"
-else
-	echo -e "\n${R}***Results Found***${NC}\n"
-	echo "$CPANELSTATS"
-	echo ""
+#cPanel Check Service Log
+if [[ -n /var/log/chkservd.log ]]; then
+	echo -e "--------------------\n${R}cPanel Check Service Log Results:${NC}\n--------------------"
+	echo -e "${CPANELCHECKSERVICE\n"
 fi
 
-echo -e "--------------------\ncPanel Check Service Log Results:\n--------------------"
-if [[ -f /var/log/chkservd.log ]]; then
-        echo -e "\nLog Available - Scanning"
-else
-    	echo -e "\nLog Not Available"
+#Exim Main Log
+if [[ -n /var/log/exim_mainlog ]]; then
+        echo -e "--------------------\n${R}Exim Main Log Results:${NC}\n--------------------"
+	echo -e "${EXIMMAINLOG}\n"
 fi
 
-if [[ -z "$CPANELCHECKSERVICE" ]]; then
-	echo -e "\n***No Results Found***\n"
-else
-	echo -e "\n${R}***Results Found***${NC}\n"
-	echo "$CPANELCHECKSERVICE"
-	echo ""
+#Exim Panic Log
+if [[ -n /var/log/exim_paniclog ]]; then
+        echo -e "--------------------\n${R}Exim Panic Log Results:${NC}\n--------------------"
+	echo -e "${EXIMPANICLOG}\n"
 fi
 
-echo -e "--------------------\nExim Main Log Results:\n--------------------"
-if [[ -f /var/log/exim_mainlog ]]; then
-        echo -e "\nLog Available - Scanning"
-else
-    	echo -e "\nLog Not Available"
+#Exim Reject Log
+if [[ -n /var/log/exim_rejectlog ]]; then
+        echo -e "--------------------\n${R}Exim Reject Log Results:${NC}\n--------------------"
+	echo -e "${EXIMREJECT}\n"
 fi
 
-if [[ -z "$EXIMMAINLOG" ]]; then
-	echo -e "\n***No Results Found***\n"
-else
-	echo -e "\n${R}***Results Found***${NC}\n"
-	echo "$EXIMMAINLOG"
-	echo ""
+#LFD Log
+if [[ -n /var/log/lfd.log ]]; then
+	echo -e "-----------------\n${R}CSF/LFD Log Results:${NC}\n-----------------"
+	echo -e "${LFD}\n"
 fi
 
-echo -e "--------------------\nExim Panic Log Results:\n--------------------"
-
-if [[ -f /var/log/exim_paniclog ]]; then
-        echo -e "\nLog Available - Scanning"
-else
-    	echo -e "\nLog Not Available"
+#CSF Deny log
+if [[ -n /etc/csf/csf.deny ]]; then
+	echo -e "-----------------\n${R}CSF Deny Log Results:${NC}\n-----------------"
+	echo -e "${CSFDENY}\n"
 fi
 
-if [[ -z "$EXIMPANICLOG" ]]; then
-	echo -e "\n***No Results Found***\n"
-else
-	echo -e "\n${R}***Results Found***${NC}\n"
-	echo "$EXIMPANICLOG"
-	echo ""
+#CSF Allow Log
+if [[ -n /etc/csf/csf.allow ]]; then
+	echo -e "-----------------\n${R}CSF Allow Log Results:${NC}\n-----------------"
+	echo -e "${CSFALLOW}\n"
 fi
 
-echo -e "--------------------\nExim Reject Log Results:\n--------------------"
-if [[ -f /var/log/exim_rejectlog ]]; then
-        echo -e "\nLog Available - Scanning"
-else
-    	echo -e "\nLog Not Available"
+#cPHulk Log
+if [[ -n /usr/local/cpanel/logs/cphulkd.log ]]; then
+	echo -e "-----------------\n${R}cPHulk Brute Force Protection Log Results:${NC}\n-----------------"
+	echo -e "${CPHULK}\n"
 fi
 
-if [[ -z "$EXIMREJECT" ]]; then
-	echo -e "\n***No Results Found***\n"
-else
-	echo -e "\n${R}***Results Found***${NC}\n"
-	echo "$EXIMREJECT"
-	echo ""
-fi
-
-echo -e "-----------------\nCSF/LFD Log Results:\n-----------------"
-if [[ -f /var/log/lfd.log ]]; then
-        echo -e "\nLog Available - Scanning"
-else
-    	echo -e "\nLog Not Available"
-fi
-
-if [[ -z "$LFD" ]]; then
-	echo -e "\n***No Results Found***\n"
-else
-	echo -e "\n${R}***Results Found***${NC}\n"
-	echo "$LFD"
-	echo ""
-fi
-
-echo -e "-----------------\nCSF Allow/Deny Log Results:\n-----------------"
-if [[ -f /etc/csf/csf.deny ]]; then
-        echo -e "\nCSF Deny Log Available - Scanning"
-else
-    	echo -e "\nCSF Deny Log Not Available"
-fi
-
-if [[ -z "$CSFDENY" ]]; then
-	echo -e "\n***No Results Found Within CSF Deny Log***\n"
-else
-	echo -e "\n${R}***Results Found Within CSF Deny Log***${NC}\n"
-	echo "$CSFDENY"
-	echo ""
-fi
-
-if [[ -f /etc/csf/csf.allow ]]; then
-        echo -e "\nCSF Allow Log Available - Scanning"
-else
-    	echo -e "\nCSF Allow  Log Not Available"
-fi
-
-if [[ -z "$CSFALLOW" ]]; then
-	echo -e "\n***No Results Found Within CSF Allow Log***\n"
-else
-	echo -e "\n${R}***Results Found Within CSF Allow Log***${NC}\n"	
-	echo "$CSFALLOW"
-	echo ""
-fi
-
-echo -e "-----------------\ncPHulk Brute Force Protection Log Results:\n-----------------"
-if [[ -f /usr/local/cpanel/logs/cphulkd.log ]]; then
-        echo -e "\nLog Available - Scanning"
-else
-    	echo -e "\nLog Not Available"
-fi
-
-if [[ -z "$CPHULK" ]]; then
-	echo -e "\n***No Results Found Within cPHulk Log***\n"
-else
-	echo -e "\n${R}***Results Found Within cPHulk Log***${NC}\n"
-	echo "$CPHULK"
-	echo ""
-fi
-
-if [[ -f /usr/local/cpanel/logs/cphulkd_errors.log ]]; then
-        echo -e "\nLog Available - Scanning"
-else
-    	echo -e "\nLog Not Available"
-fi
-
-if [ -z "$CPHULKERR" ]
-then
-	echo -e "\n***No Results Found Within cPHulk Error Log***\n"
-else
-	echo -e "\n${R}***Results Found Within cPHulk Error Log***${NC}\n"	
-	echo "$CPHULKERR"
-	echo ""
+#cPHulk Error Log
+if [[ -n /usr/local/cpanel/logs/cphulkd_errors.log ]]; then
+	echo -e "-----------------\n${R}cPHulk Brute Force Protection Error Log Results:${NC}\n-----------------"
+	echo -e "${CPHULKERR}\n"
 fi
 
 echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
