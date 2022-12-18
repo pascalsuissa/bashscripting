@@ -16,9 +16,13 @@ echo "██║     ██║   ██║██║  ███╗    ████
 echo "██║     ██║   ██║██║   ██║    ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗ ";
 echo "███████╗╚██████╔╝╚██████╔╝    ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║ ";
 echo "╚══════╝ ╚═════╝  ╚═════╝     ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ";
-echo -e "\n\n------------------------------------------\nPlease provide required IP or Search Term:\n------------------------------------------\n"
+echo -e "\nThe script will scan the logs below and report of any results within available logs.\n[If no results are found then either the log file is missing or no results were found]"
+echo -e "\n* journalctl | dmesg | Ubuntu Based System Syslog | Red Hat Based System Messages"
+echo -e "* Apache | ModSec | cPanel Access / Stats / Errors / Check Service | cPHulk Main / Error"
+echo -e "* Exim Main Log / Panic Log / Exim Reject Log | LFD | CSF Allow / Deny"
+echo -e "\n-----------------------------------------\n\nPlease provide required IP or Search Term:\n"
 read input
-echo -e "\n--------------------------------------\nData Received: ${input} - Searching...\n--------------------------------------\n"
+echo -e "\nData Received: ${input} - Searching...\n"
 
 #Color Variables
 NC="\033[0m"
@@ -47,118 +51,118 @@ CPHULKERR=$( "${GREP[@]}" "$input" /usr/local/cpanel/logs/cphulkd_errors.log 2> 
 
 #Journalctl
 if [[ -n "$JOURNALCTL" ]]; then
-	echo -e "-------------------\n${R}Journalctl Log Results:${NC}\n-------------------"
-	echo -e "${JOURNALCTL}\n"
+	echo -e "${R}-----Journalctl Log Results-----${NC}"
+	echo -e "\n${JOURNALCTL}\n"
 fi
 
 #DMESG
 if [[ -n "$DMESG" ]]; then
-	echo -e "-------------------\n${R}DMESG\Kernel Buffer Log Results:${NC}\n-------------------"
-	echo -e "${DMESG}\n"
+	echo -e "${R}-----DMESG\Kernel Buffer Log Results-----${NC}"
+	echo -e "\n${DMESG}\n"
 fi
 
 #Ubuntu System Log Messages
 if [[ -n "$UBUSYSLOG" ]]; then
-	echo -e "-------------------\n${R}Ubuntu Servers syslog Results:${NC}\n-------------------"
-	echo -e "${SYSLOG}\n"
+	echo -e "${R}-----Ubuntu Servers syslog Results-----${NC}"
+	echo -e "\n${SYSLOG}\n"
 fi
 
 #Red Hat Based System Messages
 if [[ -n "$REDHATMESSAGES" ]]; then
-        echo -e "-------------------\n${R}Red Hat Based Servers System Messages Log Results:${NC}\n-------------------"
-	echo -e "${MESSAGES}\n"
+        echo -e "${R}-----Red Hat Based Servers System Messages Log Results-----${NC}"
+	echo -e "\n${MESSAGES}\n"
 fi
 
 #Apache Logs
 if [[ -n "$APACHE" ]]; then
-        echo -e "-------------------\n${R}Apache Error Log Results:${NC}\n-------------------"
-	echo -e "${APACHE}\n"
+        echo -e "${R}-----Apache Error Log Results-----${NC}"
+	echo -e "\n${APACHE}\n"
 fi
 
 #ModSec Log
 if [[ -n "$MODSEC" ]]; then
-        echo -e "--------------------\n${R}ModSec Log Results:${NC}\n--------------------"
-	echo -e "${MODSEC}\n"
+        echo -e "${R}-----ModSec Log Results-----${NC}"
+	echo -e "\n${MODSEC}\n"
 fi
 
 #cPanel Access Log
 if [[ -n "$CPANELACCESSLOG" ]]; then
-        echo -e "--------------------\n${R}cPanel Access Log Results:${NC}\n--------------------"
-	echo -e "${CPANELACCESS}\n"
+        echo -e "${R}-----cPanel Access Log Results-----${NC}"
+	echo -e "\n${CPANELACCESS}\n"
 fi
 
 #cPanel Error Log
 if [[ -n "$CPANELERROR" ]]; then
-	echo -e "--------------------\n${R}cPanel Error Log Results:${NC}\n--------------------"
-	echo -e "${CPANELERROR}\n"
+	echo -e "${R}-----cPanel Error Log Results-----${NC}"
+	echo -e "\n${CPANELERROR}\n"
 fi
 
 #cPanel Stats Log
 if [[ -n "$CPANELSTATS" ]]; then
-        echo -e "--------------------\n${R}cPanel Stats Log Results:${NC}\n--------------------"
-	echo -e "${CPANELSTATS}\n"
+        echo -e "${R}-----cPanel Stats Log Results-----${NC}"
+	echo -e "\n${CPANELSTATS}\n"
 fi
 
 #cPanel Check Service Log
 if [[ -n "$CPANELCHECKSERVICE" ]]; then
-	echo -e "--------------------\n${R}cPanel Check Service Log Results:${NC}\n--------------------"
-	echo -e "${CPANELCHECKSERVICE}\n"
+	echo -e "${R}-----cPanel Check Service Log Results-----${NC}"
+	echo -e "\n${CPANELCHECKSERVICE}\n"
 fi
 
 #Exim Main Log
 if [[ -n "$EXIMMAINLOG" ]]; then
-        echo -e "--------------------\n${R}Exim Main Log Results:${NC}\n--------------------"
-	echo -e "${EXIMMAINLOG}\n"
+        echo -e "${R}-----Exim Main Log Results-----${NC}"
+	echo -e "\n${EXIMMAINLOG}\n"
 fi
 
 #Exim Panic Log
 if [[ -n "$EXIMPANICLOG" ]]; then
-        echo -e "--------------------\n${R}Exim Panic Log Results:${NC}\n--------------------"
-	echo -e "${EXIMPANICLOG}\n"
+        echo -e "${R}-----Exim Panic Log Results-----${NC}"
+	echo -e "\n${EXIMPANICLOG}\n"
 fi
 
 #Exim Reject Log
 if [[ -n "$EXIMPANICLOG" ]]; then
-        echo -e "--------------------\n${R}Exim Reject Log Results:${NC}\n--------------------"
-	echo -e "${EXIMREJECT}\n"
+        echo -e "${R}-----Exim Reject Log Results-----${NC}"
+	echo -e "\n${EXIMREJECT}\n"
 fi
 
 #LFD Log
 if [[ -n "$LFD" ]]; then
-	echo -e "-----------------\n${R}CSF/LFD Log Results:${NC}\n-----------------"
-	echo -e "${LFD}\n"
+	echo -e "${R}-----CSF/LFD Log Results-----${NC}"
+	echo -e "\n${LFD}\n"
 fi
 
 
 #CSF Allow Log
 if [[ -n "$CSFALLOW" ]]; then
-	echo -e "-----------------\n${R}CSF Allow Log Results:${NC}\n-----------------"
-	echo -e "${CSFALLOW}\n"
+	echo -e "${R}-----CSF Allow Log Results-----${NC}"
+	echo -e "\n${CSFALLOW}\n"
 fi
 
 #CSF Deny log
 if [[ -n "$CSFDENY" ]]; then
-	echo -e "-----------------\n${R}CSF Deny Log Results:${NC}\n-----------------"
-	echo -e "${CSFDENY}\n"
+	echo -e "${R}-----CSF Deny Log Results-----${NC}"
+	echo -e "\n${CSFDENY}\n"
 fi
 
 #cPHulk Log
 if [[ -n "$CPHULK" ]]; then
-	echo -e "-----------------\n${R}cPHulk Brute Force Protection Log Results:${NC}\n-----------------"
-	echo -e "${CPHULK}\n"
+	echo -e "${R}-----cPHulk Brute Force Protection Log Results-----${NC}"
+	echo -e "\n${CPHULK}\n"
 fi
 
 #cPHulk Error Log
 if [[ -n "$CPHULKERR" ]]; then
-	echo -e "-----------------\n${R}cPHulk Brute Force Protection Error Log Results:${NC}\n-----------------"
-	echo -e "${CPHULKERR}\n"
+	echo -e "${R}-----cPHulk Brute Force Protection Error Log Results-----${NC}"
+	echo -e "\n${CPHULKERR}\n"
 fi
 
 echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
 sleep 3s
 
-#if [[ -f "$0" ]]; then
-#	rm -- "$0"
-#fi
+if [[ -f "$0" ]]; then
+	rm -- "$0"
+fi
 
 exit
