@@ -1,22 +1,6 @@
 #!/bin/bash
 
-#------------Start Comments------------
 #The script will scan system logs and various service logs.
-
-#echo -e is intended to allow \n and to provide the function to drop lines, add text, all in one echo.
-
-#If you are interested to evaluate whether a command resulted in no output, use [ -z "$variable" ], it is the same as 
-#using [ "$variable" -eq "" ].
-
-#grep -a is intended to retrieve actual results and not "binary found" which ocaccionaly will come up.
-
-#tail -10 piped to the grep command is used to retrieve the last 10 hits of that file from our results.
-
-#Make sure to use spaces around your tests and within your variables, don't hug them too tight.
-
-#if [[ -f $0 ]] means if the script file exists and tests for it.
-#rm -- $0 will remove it.
-#------------End Comments------------
 
 echo -e "\n\n"
 echo "████████╗██╗  ██╗███████╗    ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ █████╗ ████████╗███████╗";
@@ -32,37 +16,34 @@ echo "██║     ██║   ██║██║  ███╗    ████
 echo "██║     ██║   ██║██║   ██║    ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗ ";
 echo "███████╗╚██████╔╝╚██████╔╝    ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║ ";
 echo "╚══════╝ ╚═════╝  ╚═════╝     ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ";
-echo -e "\n\n"
-sleep 2s
-echo -e "------------------------------------------\nPlease provide required IP or Search Term:\n------------------------------------------\n"
+echo -e "\n\n------------------------------------------\nPlease provide required IP or Search Term:\n------------------------------------------\n"
 read input
 echo -e "\n--------------------------------------\nData Received: ${input} - Searching...\n--------------------------------------\n"
 
 #Color Variables
 NC="\033[0m"
-G="\033[0;32m"
 R="\033[1;31m"
 
 #Variables
-GREP=( grep --color -a )
+GREP=( grep --color=always -a )
 JOURNALCTL=$( journalctl | "${GREP[@]}" "$input" | tail -10 )
 DMESG=$( "${GREP[@]}" "$input" /var/log/dmesg 2> /dev/null | tail -10 )
-UBUSYSLOG=$( "$GREP" "$input" /var/log/syslog 2> /dev/null | tail -10 )
-REDHATMESSAGES=$( "$GREP" "$input" /var/log/messages 2> /dev/null | tail -10 )
-APACHE=$( "$GREP" "$input" /usr/local/apache/logs/error_log 2> /dev/null | tail -10 )
-MODSEC=$( "$GREP" "$input" /usr/local/apache/logs/modsec_audit.log 2> /dev/null | tail -10 )
-CPANELACCESS=$( "$GREP" "$input" /usr/local/cpanel/logs/access_log 2> /dev/null | tail -10 )
-CPANELSTATS=$( "$GREP" "$input" /usr/local/cpanel/logs/stats_log 2> /dev/null | tail -10 )
-CPANELERROR=$( "$GREP" "$input" /usr/local/cpanel/logs/error_log 2> /dev/null | tail -10 )
-CPANELCHECKSERVICE=$( "$GREP" "$input" /var/log/chkservd.log 2> /dev/null| tail -10 )
-EXIMMAINLOG=$( "$GREP" "$input" /var/log/exim_mainlog 2> /dev/null | tail -10 )
-EXIMPANICLOG=$( "$GREP" "$input" /var/log/exim_paniclog 2> /dev/null | tail -10 )
-EXIMREJECT=$( "$GREP" "$input" /var/log/exim_rejectlog 2> /dev/null | tail -10 )
-LFD=$( "$GREP" "$input" /var/log/lfd.log 2> /dev/null | tail -10 )
-CSFALLOW=$( "$GREP" "$input" /etc/csf/csf.allow 2> /dev/null | tail -10 )
-CSFDENY=$( "$GREP" "$input" /etc/csf/csf.deny 2> /dev/null | tail -10 )
-CPHULK=$( "$GREP" "$input" /usr/local/cpanel/logs/cphulkd.log 2> /dev/null | tail -10 )
-CPHULKERR=$( "$GREP" "$input" /usr/local/cpanel/logs/cphulkd_errors.log 2> /dev/null | tail -10 )
+UBUSYSLOG=$( "${GREP[@]}" "$input" /var/log/syslog 2> /dev/null | tail -10 )
+REDHATMESSAGES=$( "${GREP[@]}" "$input" /var/log/messages 2> /dev/null | tail -10 )
+APACHE=$( "${GREP[@]}" "$input" /usr/local/apache/logs/error_log 2> /dev/null | tail -10 )
+MODSEC=$( "${GREP[@]}" "$input" /usr/local/apache/logs/modsec_audit.log 2> /dev/null | tail -10 )
+CPANELACCESS=$( "${GREP[@]}" "$input" /usr/local/cpanel/logs/access_log 2> /dev/null | tail -10 )
+CPANELSTATS=$( "${GREP[@]}" "$input" /usr/local/cpanel/logs/stats_log 2> /dev/null | tail -10 )
+CPANELERROR=$( "${GREP[@]}" "$input" /usr/local/cpanel/logs/error_log 2> /dev/null | tail -10 )
+CPANELCHECKSERVICE=$( "${GREP[@]}" "$input" /var/log/chkservd.log 2> /dev/null| tail -10 )
+EXIMMAINLOG=$( "${GREP[@]}" "$input" /var/log/exim_mainlog 2> /dev/null | tail -10 )
+EXIMPANICLOG=$( "${GREP[@]}" "$input" /var/log/exim_paniclog 2> /dev/null | tail -10 )
+EXIMREJECT=$( "${GREP[@]}" "$input" /var/log/exim_rejectlog 2> /dev/null | tail -10 )
+LFD=$( "${GREP[@]}" "$input" /var/log/lfd.log 2> /dev/null | tail -10 )
+CSFALLOW=$( "${GREP[@]}" "$input" /etc/csf/csf.allow 2> /dev/null | tail -10 )
+CSFDENY=$( "${GREP[@]}" "$input" /etc/csf/csf.deny 2> /dev/null | tail -10 )
+CPHULK=$( "${GREP[@]}" "$input" /usr/local/cpanel/logs/cphulkd.log 2> /dev/null | tail -10 )
+CPHULKERR=$( "${GREP[@]}" "$input" /usr/local/cpanel/logs/cphulkd_errors.log 2> /dev/null | tail -10 )
 
 #Journalctl
 if [[ -n "$JOURNALCTL" ]]; then
