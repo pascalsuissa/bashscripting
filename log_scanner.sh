@@ -161,8 +161,8 @@ fi
 echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
 sleep 3s
 
-#if [[ -f "$0" ]]; then
-#	rm -- $0
-#fi
+if [[ -f "$0" ]]; then
+	rm -- $0
+fi
 
 exit 0
