@@ -16,13 +16,22 @@ echo "██║     ██║   ██║██║  ███╗    ████
 echo "██║     ██║   ██║██║   ██║    ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗ ";
 echo "███████╗╚██████╔╝╚██████╔╝    ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║ ";
 echo "╚══════╝ ╚═════╝  ╚═════╝     ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ";
-echo -e "\nThe script will scan the logs below and report of any results within available logs.\n[If no results are found then either the log file is missing or no results were found]"
+echo -e "\nThe script will scan the logs below and report of any last 10 results within available logs.\n[If no results are found then either the log file is missing or no results were found]"
 echo -e "\n* journalctl | dmesg | Ubuntu Based System Syslog | Red Hat Based System Messages"
 echo -e "* Apache | ModSec | cPanel Access / Stats / Errors / Check Service | cPHulk Main / Error"
 echo -e "* Exim Main Log / Panic Log / Exim Reject Log | LFD | CSF Allow / Deny"
 echo -e "\n-----------------------------------------\n\nPlease provide required IP or Search Term:\n"
-read input
-echo -e "\nData Received: ${input} - Searching...\n"
+read INPUT
+echo -e "\nWould you like to scan the domain PHP logs for errors? [y/n]\n"
+read DOMAININPUT
+if [[ "$DOMAININPUT" == "y" ]]; then
+	echo -e "\nPlease enter the account name\n"
+	read ACCOUNTNAME
+else
+	echo -e "\nNo Worries - Skipping"
+fi
+echo -e "\nData Received\nRequested IP/String: ${INPUT}\nDomain Account: $ACCOUNTNAME\nSearching...\n"
+sleep 2s
 
 #Color Variables
 NC="\033[0m"
@@ -30,24 +39,24 @@ R="\033[1;31m"
 
 #Variables
 GREP="grep --color=always -a"
-JOURNALCTL=$( journalctl | $GREP $input | tail -10 )
-DMESG=$( $GREP $input /var/log/dmesg 2> /dev/null | tail -10 )
-UBUSYSLOG=$( $GREP $input /var/log/syslog 2> /dev/null | tail -10 )
-REDHATMESSAGES=$( $GREP $input /var/log/messages 2> /dev/null | tail -10 )
-APACHE=$( $GREP $input /usr/local/apache/logs/error_log 2> /dev/null | tail -10 )
-MODSEC=$( $GREP $input /usr/local/apache/logs/modsec_audit.log 2> /dev/null | tail -10 )
-CPANELACCESS=$( $GREP $input /usr/local/cpanel/logs/access_log 2> /dev/null | tail -10 )
-CPANELSTATS=$( $GREP $input /usr/local/cpanel/logs/stats_log 2> /dev/null | tail -10 )
-CPANELERROR=$( $GREP $input /usr/local/cpanel/logs/error_log 2> /dev/null | tail -10 )
-CPANELCHECKSERVICE=$( $GREP $input /var/log/chkservd.log 2> /dev/null| tail -10 )
-EXIMMAINLOG=$( $GREP $input /var/log/exim_mainlog 2> /dev/null | tail -10 )
-EXIMPANICLOG=$( $GREP $input /var/log/exim_paniclog 2> /dev/null | tail -10 )
-EXIMREJECT=$( $GREP $input /var/log/exim_rejectlog 2> /dev/null | tail -10 )
-LFD=$( $GREP $input /var/log/lfd.log 2> /dev/null | tail -10 )
-CSFALLOW=$( $GREP $input /etc/csf/csf.allow 2> /dev/null | tail -10 )
-CSFDENY=$( $GREP $input /etc/csf/csf.deny 2> /dev/null | tail -10 )
-CPHULK=$( $GREP $input /usr/local/cpanel/logs/cphulkd.log 2> /dev/null | tail -10 )
-CPHULKERR=$( $GREP $input /usr/local/cpanel/logs/cphulkd_errors.log 2> /dev/null | tail -10 )
+JOURNALCTL=$( journalctl | $GREP $INPUT | tail -10 )
+DMESG=$( $GREP $INPUT /var/log/dmesg 2> /dev/null | tail -10 )
+UBUSYSLOG=$( $GREP $INPUT /var/log/syslog 2> /dev/null | tail -10 )
+REDHATMESSAGES=$( $GREP $INPUT /var/log/messages 2> /dev/null | tail -10 )
+APACHE=$( $GREP $INPUT /usr/local/apache/logs/error_log 2> /dev/null | tail -10 )
+CPANELACCESS=$( $GREP $INPUT /usr/local/cpanel/logs/access_log 2> /dev/null | tail -10 )
+CPANELSTATS=$( $GREP $INPUT /usr/local/cpanel/logs/stats_log 2> /dev/null | tail -10 )
+CPANELERROR=$( $GREP $INPUT /usr/local/cpanel/logs/error_log 2> /dev/null | tail -10 )
+CPANELCHECKSERVICE=$( $GREP $INPUT /var/log/chkservd.log 2> /dev/null| tail -10 )
+EXIMMAINLOG=$( $GREP $INPUT /var/log/exim_mainlog 2> /dev/null | tail -10 )
+EXIMPANICLOG=$( $GREP $INPUT /var/log/exim_paniclog 2> /dev/null | tail -10 )
+EXIMREJECT=$( $GREP $INPUT /var/log/exim_rejectlog 2> /dev/null | tail -10 )
+LFD=$( $GREP $INPUT /var/log/lfd.log 2> /dev/null | tail -10 )
+CSFALLOW=$( $GREP $INPUT /etc/csf/csf.allow 2> /dev/null | tail -10 )
+CSFDENY=$( $GREP $INPUT /etc/csf/csf.deny 2> /dev/null | tail -10 )
+CPHULK=$( $GREP $INPUT /usr/local/cpanel/logs/cphulkd.log 2> /dev/null | tail -10 )
+CPHULKERR=$( $GREP $INPUT /usr/local/cpanel/logs/cphulkd_errors.log 2> /dev/null | tail -10 )
+MODSEC=$( $GREP $INPUT /usr/local/apache/logs/modsec_audit.log 2> /dev/null | tail -10 )
 
 #Journalctl
 if [[ -n "$JOURNALCTL" ]]; then
@@ -73,16 +82,17 @@ if [[ -n "$REDHATMESSAGES" ]]; then
 	echo -e "\n${MESSAGES}\n"
 fi
 
+#Domain PHP Logs
+DOMAINPHPLOG=$( $GREP error /home/${ACCOUNTNAME}/logs/*.php.error.log 2> /dev/null | tail -10 )
+if [[ -n "$DOMAINPHPLOG" ]]; then
+	echo -e "${R}-----Domain PHP Log Results-----${NC}"
+	echo -e "\n${DOMAINPHPLOG}\n"
+fi
+
 #Apache Logs
 if [[ -n "$APACHE" ]]; then
         echo -e "${R}-----Apache Error Log Results-----${NC}"
 	echo -e "\n${APACHE}\n"
-fi
-
-#ModSec Log
-if [[ -n "$MODSEC" ]]; then
-        echo -e "${R}-----ModSec Log Results-----${NC}"
-	echo -e "\n${MODSEC}\n"
 fi
 
 #cPanel Access Log
@@ -158,8 +168,13 @@ if [[ -n "$CPHULKERR" ]]; then
 	echo -e "\n${CPHULKERR}\n"
 fi
 
+#ModSec Log
+if [[ -n "$MODSEC" ]]; then
+        echo -e "${R}-----ModSec Log Results-----${NC}"
+	echo -e "\n${MODSEC}\n"
+fi
+
 echo -e "-------------------------------------------\nI Hope you found what you were looking for!\n-------------------------------------------"
-sleep 3s
 
 if [[ -f "$0" ]]; then
 	rm -- $0
