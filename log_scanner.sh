@@ -2,6 +2,31 @@
 
 #The script will scan system logs and various service logs.
 
+#Color Variables
+NC="\033[0m"
+R="\033[1;31m"
+
+#Variables
+GREP="grep --color=always -a"
+JOURNALCTL=$( journalctl | $GREP $INPUT | tail -10 )
+DMESG=$( $GREP $INPUT /var/log/dmesg 2> /dev/null | tail -10 )
+UBUSYSLOG=$( $GREP $INPUT /var/log/syslog 2> /dev/null | tail -10 )
+REDHATMESSAGES=$( $GREP $INPUT /var/log/messages 2> /dev/null | tail -10 )
+APACHE=$( $GREP $INPUT /usr/local/apache/logs/error_log 2> /dev/null | tail -10 )
+CPANELACCESS=$( $GREP $INPUT /usr/local/cpanel/logs/access_log 2> /dev/null | tail -10 )
+CPANELSTATS=$( $GREP $INPUT /usr/local/cpanel/logs/stats_log 2> /dev/null | tail -10 )
+CPANELERROR=$( $GREP $INPUT /usr/local/cpanel/logs/error_log 2> /dev/null | tail -10 )
+CPANELCHECKSERVICE=$( $GREP $INPUT /var/log/chkservd.log 2> /dev/null| tail -10 )
+EXIMMAINLOG=$( $GREP $INPUT /var/log/exim_mainlog 2> /dev/null | tail -10 )
+EXIMPANICLOG=$( $GREP $INPUT /var/log/exim_paniclog 2> /dev/null | tail -10 )
+EXIMREJECT=$( $GREP $INPUT /var/log/exim_rejectlog 2> /dev/null | tail -10 )
+LFD=$( $GREP $INPUT /var/log/lfd.log 2> /dev/null | tail -10 )
+CSFALLOW=$( $GREP $INPUT /etc/csf/csf.allow 2> /dev/null | tail -10 )
+CSFDENY=$( $GREP $INPUT /etc/csf/csf.deny 2> /dev/null | tail -10 )
+CPHULK=$( $GREP $INPUT /usr/local/cpanel/logs/cphulkd.log 2> /dev/null | tail -10 )
+CPHULKERR=$( $GREP $INPUT /usr/local/cpanel/logs/cphulkd_errors.log 2> /dev/null | tail -10 )
+MODSEC=$( $GREP $INPUT /usr/local/apache/logs/modsec_audit.log 2> /dev/null | tail -10 )
+
 echo -e "\n\n"
 echo "████████╗██╗  ██╗███████╗    ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ █████╗ ████████╗███████╗";
 echo "╚══██╔══╝██║  ██║██╔════╝    ██║   ██║██║  ╚══██╔══╝██║████╗ ████║██╔══██╗╚══██╔══╝██╔════╝";
@@ -32,31 +57,6 @@ else
 fi
 echo -e "\nData Received\nRequested IP/String: ${INPUT}\nDomain Account: $ACCOUNTNAME\nSearching...\n"
 sleep 2s
-
-#Color Variables
-NC="\033[0m"
-R="\033[1;31m"
-
-#Variables
-GREP="grep --color=always -a"
-JOURNALCTL=$( journalctl | $GREP $INPUT | tail -10 )
-DMESG=$( $GREP $INPUT /var/log/dmesg 2> /dev/null | tail -10 )
-UBUSYSLOG=$( $GREP $INPUT /var/log/syslog 2> /dev/null | tail -10 )
-REDHATMESSAGES=$( $GREP $INPUT /var/log/messages 2> /dev/null | tail -10 )
-APACHE=$( $GREP $INPUT /usr/local/apache/logs/error_log 2> /dev/null | tail -10 )
-CPANELACCESS=$( $GREP $INPUT /usr/local/cpanel/logs/access_log 2> /dev/null | tail -10 )
-CPANELSTATS=$( $GREP $INPUT /usr/local/cpanel/logs/stats_log 2> /dev/null | tail -10 )
-CPANELERROR=$( $GREP $INPUT /usr/local/cpanel/logs/error_log 2> /dev/null | tail -10 )
-CPANELCHECKSERVICE=$( $GREP $INPUT /var/log/chkservd.log 2> /dev/null| tail -10 )
-EXIMMAINLOG=$( $GREP $INPUT /var/log/exim_mainlog 2> /dev/null | tail -10 )
-EXIMPANICLOG=$( $GREP $INPUT /var/log/exim_paniclog 2> /dev/null | tail -10 )
-EXIMREJECT=$( $GREP $INPUT /var/log/exim_rejectlog 2> /dev/null | tail -10 )
-LFD=$( $GREP $INPUT /var/log/lfd.log 2> /dev/null | tail -10 )
-CSFALLOW=$( $GREP $INPUT /etc/csf/csf.allow 2> /dev/null | tail -10 )
-CSFDENY=$( $GREP $INPUT /etc/csf/csf.deny 2> /dev/null | tail -10 )
-CPHULK=$( $GREP $INPUT /usr/local/cpanel/logs/cphulkd.log 2> /dev/null | tail -10 )
-CPHULKERR=$( $GREP $INPUT /usr/local/cpanel/logs/cphulkd_errors.log 2> /dev/null | tail -10 )
-MODSEC=$( $GREP $INPUT /usr/local/apache/logs/modsec_audit.log 2> /dev/null | tail -10 )
 
 #Journalctl
 if [[ -n "$JOURNALCTL" ]]; then
