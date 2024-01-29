@@ -44,7 +44,8 @@ JOURNALCTL=$( journalctl | $GREP $INPUT | tail -15 )
 DMESG=$( $GREP $INPUT /var/log/dmesg 2> /dev/null | tail -15 )
 UBUSYSLOG=$( $GREP $INPUT /var/log/syslog 2> /dev/null | tail -15 )
 REDHATMESSAGES=$( $GREP $INPUT /var/log/messages 2> /dev/null | tail -15 )
-DOMAINPHPLOG=$( $GREP error /home/${ACCOUNTNAME}/logs/*.php.error.log 2> /dev/null | tail -15 )
+DOMAINPHPLOG_ERROR=$( $GREP error /home/${ACCOUNTNAME}/logs/*.php.error.log 2> /dev/null | tail -15 )
+DOMAINPHPLOG_WARNING=$( $GREP Warning /home/${ACCOUNTNAME}/logs/*.php.error.log 2> /dev/null | tail -15 )
 APACHE=$( $GREP $INPUT /usr/local/apache/logs/error_log 2> /dev/null | tail -15 )
 CPANELACCESS=$( $GREP $INPUT /usr/local/cpanel/logs/access_log 2> /dev/null | tail -15 )
 CPANELSTATS=$( $GREP $INPUT /usr/local/cpanel/logs/stats_log 2> /dev/null | tail -15 )
@@ -85,10 +86,16 @@ if [[ -n "$REDHATMESSAGES" ]]; then
     echo -e "\n${MESSAGES}\n"
 fi
 
-#Domain PHP Logs
-if [[ -n "$DOMAINPHPLOG" ]]; then
-    echo -e "${R}-----Domain PHP Log Results-----${NC}"
-    echo -e "\n${DOMAINPHPLOG}\n"
+#Domain PHP Logs - Errors
+if [[ -n "$DOMAINPHPLOG_ERROR" ]]; then
+    echo -e "${R}-----Domain PHP Log Results for Error Entries-----${NC}"
+    echo -e "\n${DOMAINPHPLOG_ERROR}\n"
+fi
+
+#Domain PHP Logs - Warning
+if [[ -n "$DOMAINPHPLOG_WARNING" ]]; then
+    echo -e "${R}-----Domain PHP Log Results for Warning Entries-----${NC}"
+    echo -e "\n${DOMAINPHPLOG_WARNING}\n"
 fi
 
 #Apache Logs
